@@ -1,5 +1,6 @@
 import 'package:arrowmech/Constant.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatefulWidget {
   const ContactUs({Key? key}) : super(key: key);
@@ -53,44 +54,59 @@ class _ContactUsState extends State<ContactUs> {
             const SizedBox(
               height: 25,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.call, color: Constants.primaryColor),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "+91 96383 21949",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: Constants.outfitBold,
-                      fontSize: 16),
-                ),
-              ],
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  dialNumber(phoneNumber: '+91 96383 21949', context: context);
+                  // _launchCaller();
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.call, color: Constants.primaryColor),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "+91 96383 21949",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: Constants.outfitBold,
+                        fontSize: 16),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.mail,
-                  color: Constants.primaryColor,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "hello@arrowmech.com",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: Constants.outfitBold,
-                    fontSize: 16,
+            GestureDetector(
+              onTap: (){
+                setState(() {
+                  launchUrl(emailLaunchUri);
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.mail,
+                    color: Constants.primaryColor,
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "hello@arrowmech.com",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: Constants.outfitBold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -98,3 +114,31 @@ class _ContactUsState extends State<ContactUs> {
     );
   }
 }
+
+Future<void> dialNumber(
+    {required String phoneNumber, required BuildContext context}) async {
+  final url = "tel:$phoneNumber";
+  if (await launch(url)) {
+    await launchUrl(Uri.parse(url));
+  } else {
+    Constants.showErrorToast("Unable to call");
+  }
+
+  return;
+}
+
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((MapEntry<String, String> e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
+
+// ···
+final Uri emailLaunchUri = Uri(
+  scheme: 'mailto',
+  path: 'hello@arrowmech.com',
+  query: encodeQueryParameters(<String, String>{
+    'subject': 'Example Subject & Symbols are allowed!',
+  }),
+);
