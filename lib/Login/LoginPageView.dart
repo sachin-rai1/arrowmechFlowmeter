@@ -13,8 +13,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final h = MediaQuery.of(context).size.height;
-
+    // final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
     return Container(
       decoration: const BoxDecoration(
@@ -137,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: w,
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/ContactUs');
+                          Navigator.pushNamed(context, '/ReportView');
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Constants.primaryColor),
