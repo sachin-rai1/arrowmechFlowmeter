@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "310199012539",
+    "project_id": "signin-e1fb1",
+    "storage_bucket": "signin-e1fb1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310199012539:android:ff44e05bac6326430c6d9e",
+        "android_client_info": {
+          "package_name": "com.example.arrowmech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310199012539-6cgcf96u2v1fbmo4j8nhssq7u2u4pl76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVFy7EXUayVA688VAaA2pxIzZIsWmja6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310199012539-6cgcf96u2v1fbmo4j8nhssq7u2u4pl76.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

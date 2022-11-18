@@ -1,5 +1,8 @@
 import 'package:arrowmech/Constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,11 +12,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailTextController = TextEditingController();
+  TextEditingController passTextController = TextEditingController();
   bool value = false;
 
   @override
   Widget build(BuildContext context) {
-    // final h = MediaQuery.of(context).size.height;
+
     final w = MediaQuery.of(context).size.width;
     return Container(
       decoration: const BoxDecoration(
@@ -31,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(left: 80, right: 80, top: 60),
+                    const EdgeInsets.only(left: 80, right: 80, top: 60),
                     child: Image.asset("assets/images/logo.png"),
                   ),
                 ),
@@ -72,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: TextFormField(
+                        controller: emailTextController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -94,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: TextFormField(
+                    controller: passTextController,
                     obscureText: true,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -123,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       "Remember Me",
                       style:
-                          TextStyle(fontFamily: Constants.outFit, fontSize: 16),
+                      TextStyle(fontFamily: Constants.outFit, fontSize: 16),
                     )
                   ],
                 ),
@@ -136,7 +143,14 @@ class _LoginPageState extends State<LoginPage> {
                     width: w,
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/ReportView');
+                          FirebaseAuth.instance.signInWithEmailAndPassword(email: emailTextController.text, password: passTextController.text).then((value) {
+                            Navigator.pushNamed(context, '/ReportView');
+                          }).onError((error, stackTrace){
+
+                            print("object");
+                            Constants.showErrorToast("Wrong Email or Password");
+                          });
+
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Constants.primaryColor),
