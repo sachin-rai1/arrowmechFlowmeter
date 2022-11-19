@@ -20,7 +20,9 @@ class Constants {
   static showErrorToast(msg) {
     Fluttertoast.showToast(
       msg: msg,
-      backgroundColor: Colors.red,
+      backgroundColor: primaryColor,
+
+
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:arrowmech/ContactUs/ContactUs.dart';
 import 'package:arrowmech/Login/LoginPageView.dart';
+import 'package:arrowmech/Login/Register.dart';
 import 'package:arrowmech/View/ReportView.dart';
 import 'package:arrowmech/View/SubMachine.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,12 +19,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const LoginPage(),
+      home:  SignUp(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/SubMachine': (context) => const SubMachine(),
         '/ReportView': (context) => const ReportView(),
         '/ContactUs': (context) => const ContactUs(),
+        '/SignUp': (context) =>  SignUp(),
       },
     );
   }
