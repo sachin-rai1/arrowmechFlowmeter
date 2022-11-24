@@ -1,5 +1,5 @@
-import 'package:arrowmech/Constant.dart';
 import 'package:flutter/material.dart';
+import 'package:arrowmech/Constant.dart';
 import 'package:intl/intl.dart';
 
 class ReportView extends StatefulWidget {
@@ -62,14 +62,13 @@ class _ReportViewState extends State<ReportView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: const Drawer(
+          backgroundColor: Colors.red,
+          width: 100,
+        ),
         appBar: AppBar(
           shadowColor: Colors.transparent,
-          leading: const Icon(
-            Icons.menu_outlined,
-            color: Color(0xFF757678),
-            size: 40,
-          ),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: ClipRRect(
@@ -249,6 +248,7 @@ class _ReportViewState extends State<ReportView> {
     final w = MediaQuery.of(context).size.width;
     return Expanded(
       child: Scaffold(
+        drawer:const Drawer(),
         body: ListView.builder(
           itemCount: 5,
           itemBuilder: (context, index) {

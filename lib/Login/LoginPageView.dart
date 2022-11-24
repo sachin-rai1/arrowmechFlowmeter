@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: ElevatedButton(
                         onPressed: () {
                           FirebaseAuth.instance.signInWithEmailAndPassword(email: emailTextController.text, password: passTextController.text).then((value) {
-                            Navigator.pushNamed(context, '/ReportView');
+                            Navigator.pushNamed(context, '/SubMachine');
                           }).onError((error, stackTrace){
                             Constants.showErrorToast("Wrong Email or Password");
                           });

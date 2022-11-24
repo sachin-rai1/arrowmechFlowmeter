@@ -1,12 +1,18 @@
-import 'package:arrowmech/Constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:arrowmech/Login/LoginPageView.dart';
 import 'package:flutter/material.dart';
+import 'package:arrowmech/Constant.dart';
+import 'package:alan_voice/alan_voice.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+
+
 
 class SignUp extends StatefulWidget {
-  SignUp({Key? key}) : super(key: key);
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   State<SignUp> createState() => _SignUpState();
+
 }
 
 class _SignUpState extends State<SignUp> {
@@ -15,6 +21,43 @@ class _SignUpState extends State<SignUp> {
   TextEditingController userNameTextController = TextEditingController();
   TextEditingController roleTextController = TextEditingController();
   bool value = false;
+
+  String sdkKey = "cc5b789070ebefd920791ca8b2fe08d92e956eca572e1d8b807a3e2338fdd0dc/stage";
+  Color bgColor = Colors.white;
+  @override
+  void initState() {
+    super.initState();
+    initAlan();
+  }
+  initAlan(){
+    AlanVoice.addButton(sdkKey , bottomMargin: 100 , buttonAlign: AlanVoice.BUTTON_ALIGN_RIGHT);
+    AlanVoice.callbacks.add((command)=> _handleCommand(command.data));
+
+    }
+
+
+  _handleCommand(Map<String, dynamic> response) {
+
+    switch (response["command"]) {
+      case "next_page":
+        Get.to(const LoginPage());
+        break;
+      case "prev_page":
+        Get.back();
+        break;
+      case "change_bg_color":
+        setState(() {
+          bgColor = Colors.yellow;
+        });
+        break;
+      case "disable":
+        AlanVoice.deactivate();
+        break;
+      default:
+        print("no match found");
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
